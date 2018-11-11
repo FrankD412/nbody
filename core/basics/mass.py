@@ -33,7 +33,7 @@ class PointMass(Circle):
         print(_info)
 
     def update(self, neighbors, dt):
-        r = 1000
+        r = 100000
         self.timestep += dt
         dv = Vector2D(0.0, 0.0)
         dt = Vector2D(dt * r, dt * r)
