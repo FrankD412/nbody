@@ -22,12 +22,6 @@ class TwobodyWindow(arcade.Window):
         self.earth = PointMass("Earth", Vector2D(0.0, 149.6e9),
                                Vector2D(29.78e3, 0.0),
                                695.508e6, 5.972e24, arcade.color.YELLOW)
-        self.mercury = PointMass("Mercury", Vector2D(0.0, 35.98e6),
-                                 Vector2D(48e3, 0.0),
-                                 695.508e6, 3.285e23, arcade.color.YELLOW)
-        self.venus = PointMass("Venus", Vector2D(0.0, 67.24e6),
-                               Vector2D(35e3, 0.0),
-                               695.508e6, 4.867e24, arcade.color.YELLOW)
 
         self.sun.print_summary()
         self.earth.print_summary()
@@ -37,19 +31,13 @@ class TwobodyWindow(arcade.Window):
         arcade.start_render()
         self.sun.draw(self._scale, 500)
         self.earth.draw(self._scale, 500)
-        self.venus.draw(self._scale, 500)
-        self.mercury.draw(self._scale, 500)
 
     def update(self, dt):
         """ All the logic to move, and the game logic goes here. """
         self.sun.print_summary()
-        self.sun.update([self.earth, self.mercury, self.venus], dt)
+        self.sun.update([self.earth], dt)
         self.earth.print_summary()
-        self.earth.update([self.sun, self.mercury, self.venus], dt)
-        self.mercury.print_summary()
-        self.mercury.update([self.sun, self.earth, self.venus], dt)
-        self.venus.print_summary()
-        self.venus.update([self.sun, self.mercury, self.earth], dt)
+        self.earth.update([self.sun], dt)
 
 
 def main():
