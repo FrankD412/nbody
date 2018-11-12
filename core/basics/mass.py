@@ -7,12 +7,12 @@ from core.structures.vectors import Vector2D
 GRAV_CONSTANT = 6.67408e-11
 
 
-class PointMass(Circle):
+class PointMass2D(Circle):
     """A class representing point masses."""
 
     def __init__(self, name, pos, vi, radius, mass, color):
         """Initialize a new PointMass object."""
-        super(PointMass, self).__init__(pos.x, pos.y, radius, color)
+        super(PointMass2D, self).__init__(pos.x, pos.y, radius, color)
         self.name = name
         self._velocity = vi
         self.mass = mass
@@ -32,11 +32,10 @@ class PointMass(Circle):
                     self.mass)
         print(_info)
 
-    def update(self, neighbors, dt):
-        r = 100000
-        self.timestep += dt
+    def update(self, neighbors, dt, dt_scale):
+        self.timestep += (dt * dt_scale)
         dv = Vector2D(0.0, 0.0)
-        dt = Vector2D(dt * r, dt * r)
+        dt = Vector2D(dt * dt_scale, dt * dt_scale)
         x = self._pv.x
         y = self._pv.y
         for n in neighbors:
