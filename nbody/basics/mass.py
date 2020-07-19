@@ -46,13 +46,6 @@ class PointMass2D(Circle):
             d = Vector2D(d, d)
             fg = Vector2D(fg, fg) / d / d
 
-            print(
-                "Delta t vector:        {}\n"
-                "Distance vector:       {}\n"
-                "Sum Distance vector:   {}\n"
-                "Sum Force vector:      {}"
-                .format(dt, dist, d, fg)
-            )
             # So, as it turns out, the triangle formed by the component vectors
             # of gravitational forces of objects in motion forms similar
             # triangles to the components of the triangle formed by the
@@ -61,13 +54,7 @@ class PointMass2D(Circle):
             # by scaling related to the same proportion of distance.
             # Fgx / (x1 - x2) = Fg / d
             fg = fg * (dist / d)
-            print("Force vector:          {}".format(fg))
             dv += fg
 
-        self._pv += (self._velocity * dt)
         self._velocity += (dv * dt)
-        print(
-            "Position vector:       {}\n"
-            "Velocity vector:       {}"
-            .format(self._pv, self._velocity)
-        )
+        self._pv += (self._velocity * dt) + Vector2D(.5, .5) * dt * dt * dv

@@ -10,7 +10,6 @@ class Circle(Shape2D):
     def draw(self, scale=1, offset=0):
         args = [self._pv.x, self._pv.y, self._height, self._width]
         args = list(map(lambda x: x * scale, args))
-        print(args)
         args[0] += offset
         args[1] += offset
         args += [self._color, self._angle]
